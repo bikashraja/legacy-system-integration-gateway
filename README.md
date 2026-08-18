@@ -14,6 +14,7 @@ The gateway provides a REST API for managing customers and communicates with a s
 
 The gateway does not access the legacy system's database directly. Instead, requests are passed to the legacy service, which is responsible for handling the underlying data.
 
+### Target Architecture
 ```text
         Client
            |
@@ -36,14 +37,14 @@ Simulated Legacy Service
 ### Implemented
 - [x] Spring Boot project setup
 - [x] Maven project configuration
+- [x] Simulated legacy service
+- [x] Legacy customer REST endpoint
 
 ### In Progress
-- [ ] REST API
-- [ ] Customer endpoints
+- [ ] HTTP communication between the gateway and legacy service
+- [ ] Gateway customer endpoints
 
 ### Planned
-- [ ] Simulated legacy service
-- [ ] HTTP communication between the gateway and legacy service
 - [ ] PostgreSQL persistence
 - [ ] JDBC-based database access
 - [ ] Request validation
@@ -54,8 +55,16 @@ Simulated Legacy Service
 ---
 ## Project Structure
 ```
-The project is currently in the initial development stage. 
-The structure will evolve as the gateway and simulated legacy service are added.
+legacy-system-integration-gateway/
+├── src/                    # Integration gateway
+│
+├── legacy-service/         # Simulated legacy system
+│   ├── src/
+│   ├── pom.xml
+│   └── ...
+│
+├── pom.xml
+└── README.md
 ```
 
 ---
@@ -66,9 +75,9 @@ The structure will evolve as the gateway and simulated legacy service are added.
 - Java 21
 - Spring Boot
 - Maven
+- REST / HTTP / JSON
 
 ### Planned
-- REST / HTTP / JSON
 - PostgreSQL
 - JDBC
 - JUnit 5
@@ -78,18 +87,35 @@ The structure will evolve as the gateway and simulated legacy service are added.
 
 ## Build & Run
 
-### Build
-```bash
-mvn clean install
-```
+### Gateway
 
-### Run
+From the project root:
+
 ```bash
-mvn spring-boot:run
+./mvnw clean install
+./mvnw spring-boot:run
 ```
+On Windows, use `mvnw.cmd` instead of `./mvnw`.
 
 ```markdown
-The application will start on:
+The gateway starts on:
 
-`http://localhost:8080`
+http://localhost:8080
+```
+
+### Legacy Service
+
+In separate terminal:
+
+```bash
+cd legacy-service
+./mvnw clean install
+./mvnw spring-boot:run
+```
+On Windows, use `mvnw.cmd` instead of `./mvnw`.
+
+```markdown
+The legacy service starts on:
+
+http://localhost:8081
 ```
