@@ -20,15 +20,16 @@ The gateway does not access the legacy system's database directly. Instead, requ
            |
            | HTTP / JSON
            v
-REST Integration Gateway
+REST Integration Gateway : 8080
            |
            | HTTP
            v
-Simulated Legacy Service
+Simulated Legacy Service : 8081
            |
            | JDBC
            v
-        PostgreSQL
+        PostgreSQL 17 : 5432
+        (Docker)
 ```
 
 ---
@@ -39,18 +40,19 @@ Simulated Legacy Service
 - [x] Maven project configuration
 - [x] Simulated legacy service
 - [x] Legacy customer REST endpoint
+- [x] HTTP communication between the gateway and legacy service
+- [x] PostgreSQL 17 database
+- [x] Docker Compose PostgreSQL setup
+- [x] Database schema initialization
+- [x] Sample customer data initialization
+- [x] JDBC-based customer lookup
 
 ### In Progress
-- [ ] HTTP communication between the gateway and legacy service
-- [ ] Gateway customer endpoints
-
-### Planned
-- [ ] PostgreSQL persistence
-- [ ] JDBC-based database access
+- [ ] Additional gateway customer endpoints
+- [ ] Additional customer operations
 - [ ] Request validation
 - [ ] Error handling
 - [ ] Unit and integration tests
-- [ ] Docker support
 
 ---
 ## Project Structure
@@ -63,6 +65,7 @@ legacy-system-integration-gateway/
 │   ├── pom.xml
 │   └── ...
 │
+├── docker-compose.yml      # PostgreSQL infrastructure
 ├── pom.xml
 └── README.md
 ```
@@ -71,14 +74,11 @@ legacy-system-integration-gateway/
 
 ## Tech Stack
 
-### Current
 - Java 21
 - Spring Boot
 - Maven
 - REST / HTTP / JSON
-
-### Planned
-- PostgreSQL
+- PostgreSQL 17
 - JDBC
 - JUnit 5
 - Mockito
