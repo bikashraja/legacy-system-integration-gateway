@@ -20,4 +20,16 @@ public class CustomerController {
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
+    @GetMapping("/{id}")
+    public Customer getCustomer(@PathVariable long id) {
+        try {
+            return customerService.getCustomer(id);
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Customer with id " + id + " not found"
+            );
+        }
+    }
 }
